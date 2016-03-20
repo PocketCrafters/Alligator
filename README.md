@@ -1,5 +1,7 @@
 PocketCrafters!
+
 ---------------------------LICENCE-------------------------------
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -14,11 +16,13 @@ PocketCrafters!
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------What's this?----------------------------
+
     This software wrote PocketMine-MP in Hack.
     Hack was made by Facebook, It's twice as fast as PHP.
 
 
 --------------------------Discription------------------------------
+
     We hope to remove botheration of PHP.
     And everyone can write in Hack, because Hack is like PHP.
     
