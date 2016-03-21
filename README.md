@@ -1,4 +1,4 @@
-PocketCrafters!
+Alligator -Your server runs fast more more and more!
 
 ---------------------------LICENCE-------------------------------
 
