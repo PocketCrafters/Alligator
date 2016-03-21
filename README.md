@@ -1,4 +1,4 @@
-Alligator -Your server runs fast more more and more!
+Alligator -Your server runs more more more fast!!
 
 ---------------------------LICENCE-------------------------------
 
