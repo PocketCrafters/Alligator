@@ -1,6 +1,6 @@
 Alligator -Your server runs more more more fast!!
 
-[![Build Status](http://jenkins.haniokasai.com/buildStatus/icon?job=Alligator&build=1)](http://jenkins.haniokasai.com/job/Alligator/1/)
+[!http://jenkins.haniokasai.com/job/Alligator/1/badge/icon!|http://jenkins.haniokasai.com/job/Alligator/1/]
 
 ---------------------------LICENCE-------------------------------
 
