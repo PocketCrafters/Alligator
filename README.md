@@ -1,5 +1,7 @@
 Alligator -Your server runs more more more fast!!
 
+[![Build Status](http://jenkins.haniokasai.com/job/Alligator/badge/icon)](http://jenkins.haniokasai.com/job/Alligator/)
+
 ---------------------------LICENCE-------------------------------
 
     This program is free software: you can redistribute it and/or modify
