@@ -2,6 +2,10 @@ Alligator -Your server runs more more more fast!!
 
 [![Build Status](http://jenkins.haniokasai.com/job/Alligator/1//badge/icon)](http://jenkins.haniokasai.com/job/Alligator/1/)
 
+#Download
+    jenkins http://jenkins.haniokasai.com/job/Alligator/
+    drone.io
+
 ---------------------------LICENCE-------------------------------
 
     This program is free software: you can redistribute it and/or modify
@@ -32,19 +36,18 @@ Alligator -Your server runs more more more fast!!
     
     
 -------------------------------------------------------------------
----------------------------LICENCE-------------------------------
-    ライセンスはLGPL3です。遵守して使ってください。
-+--------------------------What's this?----------------------------
- +
- +    このソフトウェアはPocketMineをhackで作られました。
- +    hackはFacebookで作られ、PHPの2倍速いです。
- + 
- +
- +--------------------------Discription------------------------------
- +
- +    私たちはPHPの煩わしさを無くしたいです。
- +    そして、hackはPHPに似ているので、誰もがhackで書けます。
- +    
- +    
- +-------------------------------------------------------------------
+
+--------------------------What's this?----------------------------
+ 
+     このソフトウェアはPocketMineをhackで作られました。
+     hackはFacebookで作られ、PHPの2倍速いです。
+ 
+ 
+--------------------------Discription------------------------------
+ 
+     私たちはPHPの煩わしさを無くしたいです。
+     そして、hackはPHPに似ているので、誰もがhackで書けます。
+    
+     
+-------------------------------------------------------------------
 
