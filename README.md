@@ -1,5 +1,7 @@
 #Alligator ***-Your server runs more more more fast!!***
 [![Build Status](http://jenkins.haniokasai.com/job/Alligator/badge/icon)]((http://jenkins.haniokasai.com/job/Alligator/ "Jenkins ")
+**Jenkins Build Status** [![Build Status](http://jenkins.clearskyteam.org/buildStatus/icon?job=ClearSky)](http://jenkins.clearskyteam.org/job/ClearSky/ "Jenkins Build Status")
+
 #Download
     jenkins http://jenkins.haniokasai.com/job/Alligator/
     drone.io
