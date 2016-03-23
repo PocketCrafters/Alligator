@@ -1,5 +1,5 @@
 #Alligator ***-Your server runs more more more fast!!***
-**Jenkins Build Status** [![Build Status](http://jenkins.haniokasai.com/buildStatus/icon?job=Alligator)](http://jenkins.haniokasai.com/job/Alligator/ "Jenkins Build Status")
+[![Build Status](http://jenkins.haniokasai.com/buildStatus/icon?job=Alligator)](http://jenkins.haniokasai.com/job/Alligator/ "Jenkins ")
 
 #Download
     jenkins http://jenkins.haniokasai.com/job/Alligator/
