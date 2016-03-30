@@ -1,6 +1,6 @@
 <?hh
 
-/**
+/*
  *
  *  ____            _        _   __  __ _                  __  __ ____
  * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \
@@ -19,46 +19,18 @@
  *
  */
 
+/**
+ * Entity related Events, like spawn, inventory, attack...
+ */
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\event\Event;
 
-class EntityDeathEvent extends EntityEvent{
-	public static $handlerList = null;
+abstract class EntityEvent extends Event{
+	/** @var \pocketmine\entity\Entity */
+	protected $entity;
 
-	/** @var Item[] */
-	private $drops = [];
-
-
-	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
-	 */
-	public function __construct(Living $entity, array $drops = []){
-		$this->entity = $entity;
-		$this->drops = $drops;
-	}
-
-	/**
-	 * @return Living
-	 */
 	public function getEntity(){
 		return $this->entity;
 	}
-
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
-	}
-
 }

@@ -21,44 +21,49 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Entity;
+use pocketmine\event\Cancellable;
 
-class EntityDeathEvent extends EntityEvent{
+class EntityRegainHealthEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
+	const CAUSE_REGEN = 0;
+	const CAUSE_EATING = 1;
+	const CAUSE_MAGIC = 2;
+	const CAUSE_CUSTOM = 3;
+	const CAUSE_SATURATION = 4;
+
+	private $amount;
+	private $reason;
 
 
 	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
+	 * @param Entity $entity
+	 * @param float  $amount
+	 * @param int    $regainReason
 	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Entity $entity, $amount, $regainReason){
 		$this->entity = $entity;
-		$this->drops = $drops;
+		$this->amount = $amount;
+		$this->reason = (int) $regainReason;
 	}
 
 	/**
-	 * @return Living
+	 * @return float
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getAmount(){
+		return $this->amount;
 	}
 
 	/**
-	 * @return \pocketmine\item\Item[]
+	 * @param float $amount
 	 */
-	public function getDrops(){
-		return $this->drops;
+	public function setAmount($amount){
+		$this->amount = $amount;
 	}
 
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
+	public function getRegainReason(){
+		return $this->reason;
 	}
 
 }

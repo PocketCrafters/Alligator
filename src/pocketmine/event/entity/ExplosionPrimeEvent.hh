@@ -21,44 +21,51 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Entity;
+use pocketmine\event\Cancellable;
 
-class EntityDeathEvent extends EntityEvent{
+/**
+ * Called when a entity decides to explode
+ */
+class ExplosionPrimeEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
-
+	protected $force;
+	private $blockBreaking;
 
 	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
+	 * @param Entity $entity
+	 * @param float  $force
 	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Entity $entity, $force){
 		$this->entity = $entity;
-		$this->drops = $drops;
+		$this->force = $force;
+		$this->blockBreaking = true;
 	}
 
 	/**
-	 * @return Living
+	 * @return float
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getForce(){
+		return $this->force;
+	}
+
+	public function setForce($force){
+		$this->force = (float) $force;
 	}
 
 	/**
-	 * @return \pocketmine\item\Item[]
+	 * @return bool
 	 */
-	public function getDrops(){
-		return $this->drops;
+	public function isBlockBreaking(){
+		return $this->blockBreaking;
 	}
 
 	/**
-	 * @param Item[] $drops
+	 * @param bool $affectsBlocks
 	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
+	public function setBlockBreaking($affectsBlocks){
+		$this->blockBreaking = (bool) $affectsBlocks;
 	}
 
 }

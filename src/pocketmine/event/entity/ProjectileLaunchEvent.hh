@@ -21,44 +21,25 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Projectile;
+use pocketmine\event\Cancellable;
 
-class EntityDeathEvent extends EntityEvent{
+class ProjectileLaunchEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
-
-
 	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
+	 * @param Projectile $entity
 	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Projectile $entity){
 		$this->entity = $entity;
-		$this->drops = $drops;
+
 	}
 
 	/**
-	 * @return Living
+	 * @return Projectile
 	 */
 	public function getEntity(){
 		return $this->entity;
-	}
-
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
 	}
 
 }

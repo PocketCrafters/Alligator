@@ -21,44 +21,32 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\block\Block;
+use pocketmine\entity\Entity;
 
-class EntityDeathEvent extends EntityEvent{
-	public static $handlerList = null;
+class EntityDamageByBlockEvent extends EntityDamageEvent{
 
-	/** @var Item[] */
-	private $drops = [];
+	/** @var Block */
+	private $damager;
 
 
 	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
+	 * @param Block     $damager
+	 * @param Entity    $entity
+	 * @param int       $cause
+	 * @param int|int[] $damage
 	 */
-	public function __construct(Living $entity, array $drops = []){
-		$this->entity = $entity;
-		$this->drops = $drops;
+	public function __construct(Block $damager, Entity $entity, $cause, $damage){
+		$this->damager = $damager;
+		parent::__construct($entity, $cause, $damage);
 	}
 
 	/**
-	 * @return Living
+	 * @return Block
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getDamager(){
+		return $this->damager;
 	}
 
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
-	}
 
 }

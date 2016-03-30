@@ -1,6 +1,6 @@
 <?hh
 
-/**
+/*
  *
  *  ____            _        _   __  __ _                  __  __ ____
  * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \
@@ -14,51 +14,36 @@
  * (at your option) any later version.
  *
  * @author PocketMine Team
- * @link   http://www.pocketmine.net/
+ * @link http://www.pocketmine.net/
  *
  *
- */
+*/
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\block\Block;
+use pocketmine\entity\Entity;
+use pocketmine\item\FoodSource;
 
-class EntityDeathEvent extends EntityEvent{
-	public static $handlerList = null;
-
-	/** @var Item[] */
-	private $drops = [];
-
-
-	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
-	 */
-	public function __construct(Living $entity, array $drops = []){
-		$this->entity = $entity;
-		$this->drops = $drops;
+class EntityEatBlockEvent extends EntityEatEvent{
+	public function __construct(Entity $entity, FoodSource $foodSource){
+		if(!($foodSource instanceof Block)){
+			throw new \InvalidArgumentException("Food source must be a block");
+		}
+		parent::__construct($entity, $foodSource);
 	}
 
 	/**
-	 * @return Living
+	 * @return Block
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getResidue(){
+		return parent::getResidue();
 	}
 
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
+	public function setResidue($residue){
+		if(!($residue instanceof Block)){
+			throw new \InvalidArgumentException("Eating a Block can only result in a Block residue");
+		}
+		parent::setResidue($residue);
 	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
-	}
-
 }

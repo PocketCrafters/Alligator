@@ -21,44 +21,29 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Entity;
+use pocketmine\event\Cancellable;
 
-class EntityDeathEvent extends EntityEvent{
+class EntityCombustEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
-
+	protected $duration;
 
 	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
+	 * @param Entity $combustee
+	 * @param int    $duration
 	 */
-	public function __construct(Living $entity, array $drops = []){
-		$this->entity = $entity;
-		$this->drops = $drops;
+	public function __construct(Entity $combustee, $duration){
+		$this->entity = $combustee;
+		$this->duration = $duration;
 	}
 
-	/**
-	 * @return Living
-	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getDuration(){
+		return $this->duration;
 	}
 
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
+	public function setDuration($duration){
+		$this->duration = (int) $duration;
 	}
 
 }

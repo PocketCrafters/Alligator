@@ -21,44 +21,27 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Entity;
+use pocketmine\Event;
+use pocketmine\event\Cancellable;
+use pocketmine\math\Vector3;
 
-class EntityDeathEvent extends EntityEvent{
+class EntityMotionEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
+	private $mot;
 
-
-	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
-	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Entity $entity, Vector3 $mot){
 		$this->entity = $entity;
-		$this->drops = $drops;
+		$this->mot = $mot;
 	}
 
 	/**
-	 * @return Living
+	 * @return Vector3
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getVector(){
+		return $this->mot;
 	}
 
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
-	}
 
 }

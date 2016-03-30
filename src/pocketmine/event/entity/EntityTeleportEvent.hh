@@ -21,44 +21,52 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Entity;
+use pocketmine\Event;
+use pocketmine\event\Cancellable;
+use pocketmine\level\Position;
 
-class EntityDeathEvent extends EntityEvent{
+class EntityTeleportEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
+	/** @var Position */
+	private $from;
+	/** @var Position */
+	private $to;
 
-
-	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
-	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Entity $entity, Position $from, Position $to){
 		$this->entity = $entity;
-		$this->drops = $drops;
+		$this->from = $from;
+		$this->to = $to;
 	}
 
 	/**
-	 * @return Living
+	 * @return Position
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getFrom(){
+		return $this->from;
 	}
 
 	/**
-	 * @return \pocketmine\item\Item[]
+	 * @param Position $from
 	 */
-	public function getDrops(){
-		return $this->drops;
+	public function setFrom(Position $from){
+		$this->from = $from;
 	}
 
 	/**
-	 * @param Item[] $drops
+	 * @return Position
 	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
+	public function getTo(){
+		return $this->to;
 	}
+
+	/**
+	 * @param Position $to
+	 */
+	public function setTo(Position $to){
+		$this->to = $to;
+	}
+
 
 }

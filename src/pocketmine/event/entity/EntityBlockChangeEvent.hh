@@ -21,44 +21,37 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\block\Block;
+use pocketmine\entity\Entity;
+use pocketmine\event\Cancellable;
 
-class EntityDeathEvent extends EntityEvent{
+/**
+ * Called when an Entity, excluding players, changes a block directly
+ */
+class EntityBlockChangeEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
+	private $from;
+	private $to;
 
-
-	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
-	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Entity $entity, Block $from, Block $to){
 		$this->entity = $entity;
-		$this->drops = $drops;
+		$this->from = $from;
+		$this->to = $to;
 	}
 
 	/**
-	 * @return Living
+	 * @return Block
 	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getBlock(){
+		return $this->from;
 	}
 
 	/**
-	 * @return \pocketmine\item\Item[]
+	 * @return Block
 	 */
-	public function getDrops(){
-		return $this->drops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
+	public function getTo(){
+		return $this->to;
 	}
 
 }

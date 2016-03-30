@@ -21,44 +21,28 @@
 
 namespace pocketmine\event\entity;
 
-use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\entity\Entity;
+use pocketmine\Event;
+use pocketmine\event\Cancellable;
+use pocketmine\level\Level;
 
-class EntityDeathEvent extends EntityEvent{
+class EntityLevelChangeEvent extends EntityEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $drops = [];
+	private $originLevel;
+	private $targetLevel;
 
-
-	/**
-	 * @param Living $entity
-	 * @param Item[] $drops
-	 */
-	public function __construct(Living $entity, array $drops = []){
+	public function __construct(Entity $entity, Level $originLevel, Level $targetLevel){
 		$this->entity = $entity;
-		$this->drops = $drops;
+		$this->originLevel = $originLevel;
+		$this->targetLevel = $targetLevel;
 	}
 
-	/**
-	 * @return Living
-	 */
-	public function getEntity(){
-		return $this->entity;
+	public function getOrigin(){
+		return $this->originLevel;
 	}
 
-	/**
-	 * @return \pocketmine\item\Item[]
-	 */
-	public function getDrops(){
-		return $this->drops;
+	public function getTarget(){
+		return $this->targetLevel;
 	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->drops = $drops;
-	}
-
 }
