@@ -26,7 +26,10 @@ use pocketmine\event\Cancellable;
 use pocketmine\item\Item;
 use pocketmine\Player;
 
-class BlockBreakEvent extends BlockEvent implements Cancellable{
+/**
+ * Called when a player places a block
+ */
+class BlockPlaceEvent extends BlockEvent implements Cancellable{
 	public static $handlerList = null;
 
 	/** @var \pocketmine\Player */
@@ -35,51 +38,36 @@ class BlockBreakEvent extends BlockEvent implements Cancellable{
 	/** @var \pocketmine\item\Item */
 	protected $item;
 
-	/** @var bool */
-	protected $instaBreak = false;
-	protected $blockDrops = [];
 
-	public function __construct(Player $player, Block $block, Item $item, $instaBreak = false){
-		$this->block = $block;
+	protected $blockReplace;
+	protected $blockAgainst;
+
+	public function __construct(Player $player, Block $blockPlace, Block $blockReplace, Block $blockAgainst, Item $item){
+		$this->block = $blockPlace;
+		$this->blockReplace = $blockReplace;
+		$this->blockAgainst = $blockAgainst;
 		$this->item = $item;
 		$this->player = $player;
-		$this->instaBreak = (bool) $instaBreak;
-		$drops = $player->isSurvival() ? $block->getDrops($item) : [];
-		foreach($drops as $i){
-			$this->blockDrops[] = Item::get($i[0], $i[1], $i[2]);
-		}
 	}
 
 	public function getPlayer(){
 		return $this->player;
 	}
 
+	/**
+	 * Gets the item in hand
+	 *
+	 * @return mixed
+	 */
 	public function getItem(){
 		return $this->item;
 	}
 
-	public function getInstaBreak(){
-		return $this->instaBreak;
+	public function getBlockReplaced(){
+		return $this->blockReplace;
 	}
 
-	/**
-	 * @return Item[]
-	 */
-	public function getDrops(){
-		return $this->blockDrops;
-	}
-
-	/**
-	 * @param Item[] $drops
-	 */
-	public function setDrops(array $drops){
-		$this->blockDrops = $drops;
-	}
-
-	/**
-	 * @param boolean $instaBreak
-	 */
-	public function setInstaBreak($instaBreak){
-		$this->instaBreak = (bool) $instaBreak;
+	public function getBlockAgainst(){
+		return $this->blockAgainst;
 	}
 }
