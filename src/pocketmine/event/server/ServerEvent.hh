@@ -1,6 +1,6 @@
 <?hh
 
-/**
+/*
  *
  *  ____            _        _   __  __ _                  __  __ ____
  * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \
@@ -19,29 +19,13 @@
  *
  */
 
+/**
+ * Events related to the server core, like networking, stop, level loading
+ */
 namespace pocketmine\event\server;
 
-use pocketmine\event;
-use pocketmine\event\Cancellable;
-use pocketmine\network\protocol\DataPacket;
-use pocketmine\Player;
+use pocketmine\event\Event;
 
-class DataPacketSendEvent extends ServerEvent implements Cancellable{
-	public static $handlerList = null;
+abstract class ServerEvent extends Event{
 
-	private $packet;
-	private $player;
-
-	public function __construct(Player $player, DataPacket $packet){
-		$this->packet = $packet;
-		$this->player = $player;
-	}
-
-	public function getPacket(){
-		return $this->packet;
-	}
-
-	public function getPlayer(){
-		return $this->player;
-	}
 }

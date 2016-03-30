@@ -1,6 +1,6 @@
 <?hh
 
-/**
+/*
  *
  *  ____            _        _   __  __ _                  __  __ ____
  * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \
@@ -21,27 +21,20 @@
 
 namespace pocketmine\event\server;
 
-use pocketmine\event;
-use pocketmine\event\Cancellable;
-use pocketmine\network\protocol\DataPacket;
-use pocketmine\Player;
+use pocketmine\command\CommandSender;
 
-class DataPacketSendEvent extends ServerEvent implements Cancellable{
+/**
+ * This event is called when a command is received over RCON.
+ */
+class RemoteServerCommandEvent extends ServerCommandEvent{
 	public static $handlerList = null;
 
-	private $packet;
-	private $player;
-
-	public function __construct(Player $player, DataPacket $packet){
-		$this->packet = $packet;
-		$this->player = $player;
+	/**
+	 * @param CommandSender $sender
+	 * @param string        $command
+	 */
+	public function __construct(CommandSender $sender, $command){
+		parent::__construct($sender, $command);
 	}
 
-	public function getPacket(){
-		return $this->packet;
-	}
-
-	public function getPlayer(){
-		return $this->player;
-	}
 }
