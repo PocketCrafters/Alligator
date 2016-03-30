@@ -19,19 +19,28 @@
  *
 */
 
-
+/**
+ * Events related Plugin enable / disable events
+ */
 namespace pocketmine\event\plugin;
 
+use pocketmine\event\Event;
 use pocketmine\plugin\Plugin;
 
 
-class PluginDisableEvent extends PluginEvent{
-	public static $handlerList = null;
+abstract class PluginEvent extends Event{
+
+	/** @var Plugin */
+	private $plugin;
+
+	public function __construct(Plugin $plugin){
+		$this->plugin = $plugin;
+	}
 
 	/**
-	 * @param Plugin $plugin
+	 * @return Plugin
 	 */
-	public function __construct(Plugin $plugin){
-		parent::__construct($plugin);
+	public function getPlugin(){
+		return $this->plugin;
 	}
 }
