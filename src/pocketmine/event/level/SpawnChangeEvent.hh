@@ -19,29 +19,34 @@
  *
  */
 
-/**
- * Level related events
- */
 namespace pocketmine\event\level;
 
-use pocketmine\level\format\FullChunk;
+use pocketmine\level\Level;
+use pocketmine\level\Position;
 
-abstract class ChunkEvent extends LevelEvent{
-	/** @var FullChunk */
-	private $chunk;
+/**
+ * An event that is called when a level spawn changes.
+ * The previous spawn is included
+ */
+class SpawnChangeEvent extends LevelEvent{
+	public static $handlerList = null;
+
+	/** @var Position */
+	private $previousSpawn;
 
 	/**
-	 * @param FullChunk $chunk
+	 * @param Level    $level
+	 * @param Position $previousSpawn
 	 */
-	public function __construct(FullChunk $chunk){
-		parent::__construct($chunk->getProvider()->getLevel());
-		$this->chunk = $chunk;
+	public function __construct(Level $level, Position $previousSpawn){
+		parent::__construct($level);
+		$this->previousSpawn = $previousSpawn;
 	}
 
 	/**
-	 * @return FullChunk
+	 * @return Position
 	 */
-	public function getChunk(){
-		return $this->chunk;
+	public function getPreviousSpawn(){
+		return $this->previousSpawn;
 	}
 }

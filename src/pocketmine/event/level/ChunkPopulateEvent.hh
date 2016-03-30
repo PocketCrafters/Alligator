@@ -19,29 +19,11 @@
  *
  */
 
-/**
- * Level related events
- */
 namespace pocketmine\event\level;
 
-use pocketmine\level\format\FullChunk;
-
-abstract class ChunkEvent extends LevelEvent{
-	/** @var FullChunk */
-	private $chunk;
-
-	/**
-	 * @param FullChunk $chunk
-	 */
-	public function __construct(FullChunk $chunk){
-		parent::__construct($chunk->getProvider()->getLevel());
-		$this->chunk = $chunk;
-	}
-
-	/**
-	 * @return FullChunk
-	 */
-	public function getChunk(){
-		return $this->chunk;
-	}
+/**
+ * Called when a Chunk is populated (after receiving it on the main thread)
+ */
+class ChunkPopulateEvent extends ChunkEvent{
+	public static $handlerList = null;
 }
