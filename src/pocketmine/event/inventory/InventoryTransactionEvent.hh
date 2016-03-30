@@ -23,55 +23,30 @@ namespace pocketmine\event\inventory;
 
 use pocketmine\event\Cancellable;
 use pocketmine\event\Event;
-use pocketmine\inventory\Recipe;
-use pocketmine\item\Item;
-use pocketmine\Player;
+use pocketmine\inventory\TransactionGroup;
 
-class CraftItemEvent extends Event implements Cancellable{
+/**
+ * Called when there is a transaction between two Inventory objects.
+ * The source of this can be a Player, entities, mobs, or even hoppers in the future!
+ */
+class InventoryTransactionEvent extends Event implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $input = [];
-	/** @var Recipe */
-	private $recipe;
-	/** @var \pocketmine\Player */
-	private $player;
-
+	/** @var TransactionGroup */
+	private $ts;
 
 	/**
-	 * @param \pocketmine\Player $player
-	 * @param Item[] $input
-	 * @param Recipe $recipe
+	 * @param TransactionGroup $ts
 	 */
-	public function __construct(Player $player, array $input, Recipe $recipe){
-		$this->player = $player;
-		$this->input = $input;
-		$this->recipe = $recipe;
+	public function __construct(TransactionGroup $ts){
+		$this->ts = $ts;
 	}
 
 	/**
-	 * @return Item[]
+	 * @return TransactionGroup
 	 */
-	public function getInput(){
-		$items = [];
-		foreach($items as $i => $item){
-			$items[$i] = clone $item;
-		}
-
-		return $items;
+	public function getTransaction(){
+		return $this->ts;
 	}
 
-	/**
-	 * @return Recipe
-	 */
-	public function getRecipe(){
-		return $this->recipe;
-	}
-
-	/**
-	 * @return \pocketmine\Player
-	 */
-	public function getPlayer(){
-		return $this->player;
-	}
 }

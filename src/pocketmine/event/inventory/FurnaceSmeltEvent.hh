@@ -21,57 +21,51 @@
 
 namespace pocketmine\event\inventory;
 
+use pocketmine\event\block\BlockEvent;
 use pocketmine\event\Cancellable;
-use pocketmine\event\Event;
-use pocketmine\inventory\Recipe;
 use pocketmine\item\Item;
-use pocketmine\Player;
+use pocketmine\tile\Furnace;
 
-class CraftItemEvent extends Event implements Cancellable{
+class FurnaceSmeltEvent extends BlockEvent implements Cancellable{
 	public static $handlerList = null;
 
-	/** @var Item[] */
-	private $input = [];
-	/** @var Recipe */
-	private $recipe;
-	/** @var \pocketmine\Player */
-	private $player;
+	private $furnace;
+	private $source;
+	private $result;
 
-
-	/**
-	 * @param \pocketmine\Player $player
-	 * @param Item[] $input
-	 * @param Recipe $recipe
-	 */
-	public function __construct(Player $player, array $input, Recipe $recipe){
-		$this->player = $player;
-		$this->input = $input;
-		$this->recipe = $recipe;
+	public function __construct(Furnace $furnace, Item $source, Item $result){
+		parent::__construct($furnace->getBlock());
+		$this->source = clone $source;
+		$this->source->setCount(1);
+		$this->result = $result;
+		$this->furnace = $furnace;
 	}
 
 	/**
-	 * @return Item[]
+	 * @return Furnace
 	 */
-	public function getInput(){
-		$items = [];
-		foreach($items as $i => $item){
-			$items[$i] = clone $item;
-		}
-
-		return $items;
+	public function getFurnace(){
+		return $this->furnace;
 	}
 
 	/**
-	 * @return Recipe
+	 * @return Item
 	 */
-	public function getRecipe(){
-		return $this->recipe;
+	public function getSource(){
+		return $this->source;
 	}
 
 	/**
-	 * @return \pocketmine\Player
+	 * @return Item
 	 */
-	public function getPlayer(){
-		return $this->player;
+	public function getResult(){
+		return $this->result;
+	}
+
+	/**
+	 * @param Item $result
+	 */
+	public function setResult(Item $result){
+		$this->result = $result;
 	}
 }
